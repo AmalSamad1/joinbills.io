@@ -26,7 +26,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="jb.png" imagesizes="100"/>
 
-    <title>Billing Software</title>
+    <title>JoinBills</title>
     <link rel="manifest" href="manifest.json">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
@@ -76,9 +76,16 @@
       console.error("No key passed to Razorpay");
       return;
     }
-
-    var rzp = new Razorpay(options);
-    rzp.open();
+        var rzp = new Razorpay(options);
+            rzp.open();
+            rzp.on('payment.failed', function (response) {
+                console.log(response);
+                // Handle payment failure
+            });
+            rzp.on('payment.success', function (response) {
+                console.log(response);
+                // Handle payment success
+            });
   }
 </script>
 
